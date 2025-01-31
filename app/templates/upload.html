@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .upload-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .upload-container h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #000;
+        }
+
+        .dropdown {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .dropdown-select {
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #B3C7F9;
+            color: #000;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .upload-icon {
+            background-color: #B3C7F9;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px auto;
+        }
+
+        .upload-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload-container">
+        <div class="dropdown">
+            <span class="dropdown-label">Category</span>
+            <select class="dropdown-select">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+        </div>
+
+
+        <div class="upload-icon">
+            <label for="doc-upload" style="cursor: pointer;">
+                <img src="{{ url_for('static', filename='Images/upload-icon.png') }}" alt="Upload Icon">
+            </label>
+        </div>
+        <div class="upload-text">Upload the document</div>
+        
+        <div class="upload-input">
+            <input type="file" id="doc-upload" name="doc-upload" accept=".doc,.docx,.pdf" style="display: none;">
+        </div>
+        
+    </div>
+</body>
+
+
+</html>

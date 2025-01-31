@@ -1,0 +1,55 @@
+vasp_project/                      # Root project directory
+│
+├── app/                          # Main application package
+│   ├── __init__.py              # Initialize Flask app, configs, and extensions
+│   │
+│   ├── auth/                    # Authentication related code
+│   │   ├── __init__.py
+│   │   ├── routes.py            # Login/registration routes
+│   │   ├── models.py            # User model
+│   │   └── forms.py             # Login/registration forms
+│   │
+│   ├── core/                    # Core application logic
+│   │   ├── __init__.py
+│   │   ├── routes.py            # Main application routes
+│   │   ├── models.py            # Database models for documents/data
+│   │   └── utils.py             # Helper functions
+│   │
+│   ├── document_processing/     # Document processing logic
+│   │   ├── __init__.py
+│   │   ├── llm_processor.py     # LLM integration and text extraction
+│   │   └── excel_handler.py     # Excel file operations
+│   │
+│   ├── static/                  # Static files
+│   │   ├── css/                 # CSS files
+│   │   ├── js/                  # JavaScript files
+│   │   └── images/              # Image files
+│   │
+│   ├── templates/               # Jinja2 templates
+│   │   ├── auth/               # Authentication templates
+│   │   ├── core/               # Main application templates
+│   │   └── base.html           # Base template
+│   │
+│   └── uploads/                # Temporary file upload directory
+│       ├── documents/          # Uploaded documents
+│       └── processed/          # Processed files
+│
+├── config/                      # Configuration files
+│   ├── __init__.py
+│   ├── default.py              # Default configuration
+│   ├── development.py          # Development configuration
+│   └── production.py           # Production configuration
+│
+├── migrations/                  # Database migrations directory
+│
+├── tests/                      # Test files
+│   ├── __init__.py
+│   ├── test_auth.py           # Authentication tests
+│   ├── test_core.py           # Core functionality tests
+│   └── test_document_processing.py  # Document processing tests
+│
+├── .env                        # Environment variables
+├── .gitignore                 # Git ignore file
+├── requirements.txt           # Project dependencies
+├── run.py                     # Application entry point
+└── wsgi.py                    # WSGI entry point for production

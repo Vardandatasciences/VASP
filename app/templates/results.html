@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <style>
+        .split-container {
+            display: flex;
+            gap: 20px;
+        }
+        .left-section {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow: auto;
+            height: 90vh;
+        }
+        .right-section {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Invoice Details</h1>
+        <div class="split-container">
+            <!-- Left Section: PDF Viewer -->
+            <div class="left-section">
+                {% if pdf_url.endswith('.pdf') %}
+                    <embed src="{{ pdf_url }}" type="application/pdf" width="100%" height="100%">
+                {% else %}
+                    <img src="{{ pdf_url }}" alt="Preview" width="100%">
+                {% endif %}
+            </div>
+            
+
+            <!-- Right Section: Form -->
+            <div class="right-section">
+                <form method="POST" action="/save-edits">
+                    <table class="table table-bordered table-striped mt-4">
+                        <tbody>
+
+                            <tr>
+                                <th>Category</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[category]" value="{{ data.get('category', '') }}">
+                                </td>
+                            </tr>
+                            {% if data.get('category', '') == 'Other' %}
+                            <tr>
+                                <th>Specify Category</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[specified_category]" placeholder="Enter the category">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[name]" placeholder="Enter the name">
+                                </td>
+                            </tr>
+                            {% endif %}
+
+                            <tr>
+                                <th>Platform Name</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Platform Name]" value="{{ data.get('Platform Name', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Provider</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[provider]" value="{{ data.get('provider', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Product Brand</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[product brand]" value="{{ data.get('product brand', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Product Description</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[product description]" value="{{ data.get('product description', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Order Date</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Order Date]" value="{{ data.get('Order Date', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Expiry Date</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Expiry Date]" value="{{ data.get('Expiry Date', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Invoice date</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Invoice date]" value="{{ data.get('Invoice date', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Quantity</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Quantity]" value="{{ data.get('Quantity', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total Amount</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Total Amount]" value="{{ data.get('Total Amount', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Discount percentage</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Discount percentage]" value="{{ data.get('Discount percentage', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tax amount</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Tax amount]" value="{{ data.get('Tax amount', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>IGST percentage</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[IGST percentage]" value="{{ data.get('IGST percentage', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Seller address</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Seller address]" value="{{ data.get('Seller address', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Billing Address</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Billing Address]" value="{{ data.get('Billing Address', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Shipping address</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Shipping address]" value="{{ data.get('Shipping address', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Seller address</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Seller address]" value="{{ data.get('Seller address', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Customer Name</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Customer Name]" value="{{ data.get('Customer Name', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Pan No</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Pan No]" value="{{ data.get('Pan No', '') }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Mode of Payement</th>
+                                <td>
+                                    <input type="text" class="form-control" name="fields[Mode of Payement]" value="{{ data.get('Mode of Payement', '') }}">
+                                </td>
+                            </tr>
+                            
+                            
+                        </tbody>
+                    </table>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

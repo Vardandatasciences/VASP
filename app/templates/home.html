@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Vservices_logo.png') }}" alt="Logo" style="position: absolute; left: 2px; top: 2px; width: 120px;">
+        </div>
+        <h1>Welcome, {{ username }}</h1>
+        <nav>
+            <a href="#">Contact Us</a>
+            <a href="#">Login / Register</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <h2><span>Congratulations 🎉</span>,We Think you Purchased a new Product.</h2>
+        <h2><span> How can we assist you?</span></h2>
+        <div class="icon-container">
+            <div class="icon">
+                <img src="{{ url_for('static', filename='Images/upload-icon.png') }}" alt="Upload" onclick="openModal()">
+                <p>Upload</p>
+            </div>
+
+            <div class="icon">
+                <img src="{{ url_for('static', filename='Images/warranty-icon.png') }}" alt="Warranty">
+                <p>Warranty</p>
+            </div>
+
+            <div class="icon">
+                <img src="{{ url_for('static', filename='Images/expiry-icon.png') }}" alt="Expiry">
+                <p>Expiry</p>
+            </div>
+
+            <div class="icon">
+                <img src="{{ url_for('static', filename='Images/services-icon.png') }}" alt="Services" onclick="window.location.href='{{ url_for('core.services') }}'">
+
+                <p>Services</p>
+            </div>
+        </div>
+    </div>
+    <div class="product-container">
+        {% include 'products.html' %}
+    </div>
+
+    <!-- Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            
+    
+            <!-- File Upload Form -->
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                <div class="dropdown">
+                    <span class="dropdown-label">Category:</span>
+                    <select class="dropdown-select" name="category" id="category-select">
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="upload-icon">
+                    <!-- Trigger file input on image click -->
+                    <label for="doc-upload" style="cursor: pointer;">
+                        <img src="{{ url_for('static', filename='Images/upload-icon.png') }}" alt="Upload Icon">
+                    </label>
+                    <input type="file" id="doc-upload" name="doc-upload" accept=".doc,.docx,.pdf" style="display: none;" required>
+                </div>
+    
+                <button type="submit" class="close" id="upload-button">Upload</button>
+                <button type="button" class="close" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    </div>
+    
+    <script>
+        // Open modal
+        function openModal() {
+            document.getElementById('uploadModal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+        }
+
+        // JavaScript to programmatically trigger file input
+        document.getElementById("upload-trigger").onclick = function () {
+            document.getElementById("doc-upload").click();
+        };
+
+        function triggerFileSelect() {
+        document.getElementById('doc-upload-btn').click();
+    }
+    </script>
+</body>
+</html>

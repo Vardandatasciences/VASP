@@ -1,0 +1,124 @@
+/* Overlay for pop-up */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    z-index: 1000;
+}
+
+/* Pop-up content */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    display: none; /* Initially hidden */
+    text-align: center;
+    width: 300px;
+}
+
+.popup h2 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.popup p {
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+/* Success style */
+.popup.I {
+    border-top: 5px solid #4CAF50; /* Green border for success */
+}
+
+.popup.I #popup-icon {
+    background-color: #4CAF50;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+/* Error style */
+.popup.E {
+    border-top: 5px solid #f44336; /* Red border for error */
+}
+
+.popup.E #popup-icon {
+    background-color: #f44336;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+
+/* Information style */
+.popup.W {
+    border-top: 5px solid #f4e136; /* Green border for success */
+}
+
+.popup.W #popup-icon {
+    background-color: #f4e136;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+
+/* Close button */
+.popup button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #45a049;
+}
+
+/* Error button style */
+.popup.E button {
+    background-color: #f44336;
+}
+
+.popup.E button:hover {
+    background-color: #d32f2f;
+}
+
+/* Error button style */
+.popup.W button {
+    background-color: #f4e136;
+}
+
+.popup.W button:hover {
+    background-color: #f4e136;
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+         body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #d4ecfc; /* Match background */
+    }
+    .container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px; /* Rounded edges */
+        overflow: hidden; /* Remove overflow */
+    }
+    .left-section {
+        background-color: #a7cee6; /* Match left section */
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .left-section .logo img {
+        width: 450px; /* Match the size in the image */
+        height: auto;
+    }
+    .right-section {
+        background-color: #e8f3fd; /* Light blue shade */
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+    .signup-form {
+        width: 60%;
+    }
+    .signup-form label {
+        font-size: 22px; /* Smaller font size */
+        color: #2b4d77; /* Darker blue */
+        margin-bottom: 5px;
+        display: block;
+    }
+    .signup-form input,
+    .signup-form select {
+        width: calc(100% - 20px); /* Default width */
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #2b4d77;
+        border-radius: 5px;
+        font-size: 22px;
+    }
+    .signup-form input.email-width {
+        width: 92% !important; /* Ensure the email field width changes */
+    }
+    .signup-form select.country-code-width {
+        width: 100% !important; /* Fixed width for the dropdown */
+        min-width: 290px; /* Ensures it doesn't shrink too much */
+        max-width: 350px; /* Prevents it from growing too much */
+    }
+    .form-row {
+        display: flex;
+        gap: 10px; /* Add spacing between inputs */
+    }
+    .signup-form button {
+        width: 30%; /* Adjust width if needed */
+        padding: 10px;
+        background-color: #3d8dc7; /* Match button color */
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto; /* Center the button horizontally */
+        display: block; /* Ensure it behaves like a block element for centering */
+        text-align: center;
+    }
+
+    .signup-form button:hover {
+        background-color: #2b6ea1; /* Darker blue on hover */
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 24px; /* Smaller font for login link */
+        color: #f1390b;
+    }
+    .login-link a {
+        color: #2b4d77;
+        text-decoration: none;
+    }
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+    .footer {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #01579b;
+        text-align: right;
+    }
+    .footer-logo {
+        width: 200px;
+        height: auto;
+    }
+    .hidden {
+        display: none;
+    }
+    .forgot{
+        font-size: 22px; /* Smaller font size */
+        color: #2b4d77; /* Darker blue */
+        margin-bottom: 5px;
+        display: block;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Vservices_logo.png') }}" alt="Company Logo">
+            </div>
+        </div>
+        <div class="right-section">
+            <form id="login-form" action="{{ url_for('auth.login') }}" method="POST" class="signup-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="off">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+                
+                <div class="forgot">
+                    <a href="#" onclick="showForgotPassword()">Forgot password?</a>
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgot-password-form" class="forgot-password-form hidden">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+                <button type="button" onclick="sendVerificationCode()">Send Verification Code</button>
+            </form>
+
+            <!-- Verification Form -->
+            <form id="verification-form" class="verification-form hidden">
+                <label for="verification-code">Verification Code</label>
+                <input type="text" id="verification-code" name="verification-code" required>
+                <button type="button" onclick="verifyCode()">Verify Code</button>
+            </form>
+
+            <!-- Reset Password Form -->
+            <form id="reset-password-form" class="reset-password-form hidden">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" name="new-password" required>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <button type="button" onclick="resetPassword()">Reset Password</button>
+            </form>
+
+            <div class="login-link">
+                <p>If you don't have account? <a href="{{ url_for('auth.signup') }}">signup</a></p>
+            </div>
+        </div>
+        <div class="footer">
+            <img src="{{ url_for('static', filename='company_logo.png') }}" alt="Logo" class="footer-logo">
+        </div>
+    </div>
+
+    <script>
+        function showForgotPassword() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('forgot-password-form').classList.remove('hidden');
+        }
+
+        async function sendVerificationCode() {
+            const email = document.getElementById('email').value;
+            if (email) {
+                const response = await fetch('/send-verification-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Verification code sent to ' + email);
+                    document.getElementById('forgot-password-form').classList.add('hidden');
+                    document.getElementById('verification-form').classList.remove('hidden');
+                } else {
+                    alert('Error sending verification code.');
+                }
+            } else {
+                alert('Please enter your email address.');
+            }
+        }
+
+        async function verifyCode() {
+            const code = document.getElementById('verification-code').value;
+            const response = await fetch('/verify-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code: code })
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert('Verification successful');
+                document.getElementById('verification-form').classList.add('hidden');
+                document.getElementById('reset-password-form').classList.remove('hidden');
+            } else {
+                alert('Invalid verification code.');
+            }
+        }
+
+        async function resetPassword() {
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if (newPassword === confirmPassword) {
+                const response = await fetch('/reset-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ newPassword: newPassword })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Password reset successful');
+                    document.getElementById('reset-password-form').classList.add('hidden');
+                    document.getElementById('login-form').classList.remove('hidden');
+                } else {
+                    alert('Error resetting password.');
+                }
+            } else {
+                alert('Passwords do not match.');
+            }
+        }
+    </script>
+</body>
+</html>

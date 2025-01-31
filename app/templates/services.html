@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}">
+</head>
+<body>
+    <h1>Services - Complaint Request</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form action="/submit-complaint" method="POST">
+
+        
+        <!-- Category Dropdown -->
+        <div>
+            <label for="category">Select Category:</label>
+            <select id="category" name="category" required>
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Product Dropdown -->
+        <div>
+            <label for="product">Select Product:</label>
+            <select id="product" name="product" required>
+                {% for product in products %}
+                    <option value="{{ product }}">{{ product }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Issue Description -->
+        <div>
+            <label for="issue">Explain your issue:</label>
+            <textarea id="issue" name="issue" rows="5" required></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="window.location.href='/'">Back</button>
+        </div>
+    </form>
+
+    <script>
+        // Fetch products when a category is selected
+        document.getElementById('category').addEventListener('change', function () {
+            const selectedCategory = this.value;
+
+            // Make an AJAX request to fetch products
+            fetch('/get-products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ category: selectedCategory }),
+            })
+            .then(response => response.json())
+            .then(products => {
+                const productDropdown = document.getElementById('product');
+                productDropdown.innerHTML = ''; // Clear existing options
+
+                // Populate new products
+                products.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product;
+                    option.textContent = product;
+                    productDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching products:', error));
+        });
+    </script>
+</body>
+</html>

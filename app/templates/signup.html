@@ -134,7 +134,7 @@
 
         <!-- Right Section -->
         <div class="right-section">
-            <form action="{{ url_for('signup') }}" method="POST" class="signup-form">
+            <form action="{{ url_for('auth.signup') }}" method="POST" class="signup-form">
                 <div class="form-row">
                     <div>
                         <label for="username">Username:</label>
@@ -145,10 +145,10 @@
                         <input type="password" id="password" name="password" required>
                     </div>
                 </div>
-
+            
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" class="email-width" required>
-
+            
                 <div class="form-row">
                     <div>
                         <label for="country_code">Country Code:</label>
@@ -162,9 +162,19 @@
                     <div>
                         <label for="mobile_number">Mobile Number:</label>
                         <input type="text" id="mobile_number" name="mobile_number" required>
+                        <button type="button" id="sendOtpBtn">Send OTP</button>
                     </div>
                 </div>
-
+            
+                <div class="form-row">
+                    <div>
+                        <label for="otp">Enter OTP:</label>
+                        <input type="text" id="otp" name="otp" required>
+                        <button type="button" id="verifyOtpBtn">Verify OTP</button>
+                        <p id="otpStatus" style="color: red; display: none;">OTP is invalid!</p>
+                    </div>
+                </div>
+            
                 <div class="form-row">
                     <div>
                         <label for="location">Current Location:</label>
@@ -175,12 +185,13 @@
                         <input type="text" id="pincode" name="pincode" required>
                     </div>
                 </div>
-
-                <button type="submit">Next Step</button>
+            
+                <button type="button" id="signupBtn" >Next Step</button>
             </form>
+            
 
             <div class="login-link">
-                <p>If you already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+                <p>If you already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
             </div>
         </div>
         <div class="footer">
@@ -189,3 +200,130 @@
     </div>
 </body>
 </html>
+<script>
+    var sendOtpUrl = "{{ url_for('auth.send_otp') }}";
+    var verifyOtpUrl = "{{ url_for('auth.verify_otp') }}";
+</script>
+
+<script>
+document.getElementById('sendOtpBtn').addEventListener('click', function () {
+    let countryCode = document.getElementById('country_code').value;
+    let mobileNumber = document.getElementById('mobile_number').value;
+
+    if (!countryCode || !mobileNumber) {
+        alert("Please enter a valid country code and mobile number.");
+        return;
+    }
+
+    document.getElementById('otp').value = "";  // ✅ Clear the OTP field before sending new OTP
+
+    fetch(sendOtpUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            country_code: countryCode,
+            mobile_number: mobileNumber
+        })
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("OTP sent successfully!");
+        } else {
+            alert("Error sending OTP: " + data.message);
+        }
+    }).catch(error => {
+        console.error("Error:", error);
+    });
+});
+
+
+    document.getElementById('verifyOtpBtn').addEventListener('click', function () {
+    let otpValue = document.getElementById('otp').value;
+
+    fetch(verifyOtpUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ otp: otpValue })
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            document.getElementById('otpStatus').style.display = "none";
+            document.getElementById('signupBtn').disabled = false;
+            document.getElementById('verifyOtpBtn').disabled = true;  // ✅ Disable after success
+            alert("OTP verified successfully!");
+        } else {
+            document.getElementById('otpStatus').style.display = "block";
+        }
+    }).catch(error => {
+        console.error("Error:", error);
+    });
+});
+
+document.getElementById('signupBtn').addEventListener('click', function(event) {
+    console.log("Submit button clicked"); // Debug log
+    
+    // Get all form fields
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    let email = document.getElementById('email').value;
+    let countryCode = document.getElementById('country_code').value;
+    let mobileNumber = document.getElementById('mobile_number').value;
+    let location = document.getElementById('location').value;
+    let pincode = document.getElementById('pincode').value;
+    let otp = document.getElementById('otp').value;
+
+    console.log("Form data:", { // Debug log
+        username,
+        email,
+        countryCode,
+        mobileNumber,
+        location,
+        pincode,
+        otp
+    });
+
+    // Validate all required fields
+    if (!username || !password || !email || !countryCode || !mobileNumber || !location || !pincode || !otp) {
+        alert("Please fill in all required fields.");
+        return false;
+    }
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('email', email);
+    formData.append('country_code', countryCode);
+    formData.append('mobile_number', mobileNumber);
+    formData.append('location', location);
+    formData.append('pincode', pincode);
+    formData.append('otp', otp);
+
+    // Send form data using fetch
+    fetch("{{ url_for('auth.signup') }}", {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log("Response received:", response); // Debug log
+        if (response.ok) {
+            // Redirect to payment page
+            window.location.href = "{{ url_for('auth.payment_page') }}";
+        } else {
+            alert("Error submitting form");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error submitting form");
+    });
+
+    return false;
+});
+
+
+</script>

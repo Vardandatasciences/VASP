@@ -6,13 +6,17 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import random
+import requests  # For sending WhatsApp messages
 from app.auth.utils import *
 from config.config import Config
 
 UPLOAD_FOLDER = Config.UPLOAD_FOLDER
 EXTRACTED_FOLDER = Config.EXTRACTED_FOLDER
 EXCEL_FILE = Config.EXCEL_FILE
+WHATSAPP_API_URL = 'https://graph.facebook.com/v21.0/521803094347148/messages'
+WHATSAPP_ACCESS_TOKEN = 'EAAZAFlVKZBf1EBO6qek1hZBaKwpFbPocrTmbyWmTgQ6zjeRyCn0DuJF27rEq91hYgzgMsgAmd2eSWwmZAi6VGd4IiouzsYYSPg2OqBSVN9clnKqX4yeWIcULbZA0rh2phwIkC5hp2ZCPZALq64PUKCNaZAoyVRYECwGaVuIyEQsX8DUHmQC8PbX9dMXXCPZAn23QnsW04jMKwiNuqauvgIE67kZAHusQ0ir7TgWT4ZD'
+TEMPLATE_NAME = 'otp_verfication'
 
 
 from app.auth.utils import connection_pool
@@ -105,12 +109,85 @@ def confirm_logout():
     session.clear()
     # Redirect to the login screen
     return redirect(url_for('auth.login'))
+
+
+
+
+
+# OTP Sending Route
+@auth_bp.route('/send_otp', methods=['POST'])
+def send_otp():
+    data = request.json
+    country_code = data.get('country_code')
+    mobile_number = data.get('mobile_number')
+
+    if not country_code or not mobile_number:
+        return jsonify({'status': 'error', 'message': 'Country code and phone number are required'}), 400
+
+    full_phone_number = f"{country_code}{mobile_number}"
+    otp = str(random.randint(100000, 999999))
+    session['otp'] = otp  # Store OTP in session
+    
+
+    headers = {
+        "Authorization": f"Bearer {WHATSAPP_ACCESS_TOKEN}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+    "messaging_product": "whatsapp",
+    "to": full_phone_number,
+    "type": "template",
+    "template": {
+        "name": TEMPLATE_NAME,
+        "language": {"code": "en"},
+        "components": [
+            {
+                "type": "body",
+                "parameters": [{"type": "text", "text": otp}]
+            },
+            {
+                "type": "button",
+                "sub_type": "url",
+                "index": 0,
+                "parameters": [{"type": "text", "text": "Verify"}]  # Ensure ≤ 15 characters
+            }
+        ]
+    }
+}
+
+
+
+    response = requests.post(WHATSAPP_API_URL, json=payload, headers=headers)
+    print("WhatsApp API Response:", response.text)
+
+    if response.status_code == 200:
+        return jsonify({'status': 'success', 'message': 'OTP sent successfully'})
+    else:
+        return jsonify({'status': 'error', 'message': f'Failed to send OTP: {response.text}'}), 500
+
+# OTP Verification Route
+@auth_bp.route('/verify_otp', methods=['POST'])
+def verify_otp():
+    data = request.json
+    user_otp = data.get('otp')
+    
+    
+    if session.get('otp') == user_otp:
+        session.pop('otp', None)
+        return jsonify({'status': 'success', 'message': 'OTP verified'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid OTP'}), 400
  
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
+
+    
+
     countries = execute_query("SELECT name, country_code FROM countries")
     
     if request.method == 'POST':
+        
         username = request.form.get('username')
         password = request.form.get('password')
         email = request.form.get('email')
@@ -118,12 +195,15 @@ def signup():
         mobile_number = request.form.get('mobile_number')
         location = request.form.get('location')
         pincode = request.form.get('pincode')
-
+        
         if password and username and email and country_code and mobile_number and location and pincode:
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        
             connection = connection_pool.get_connection()
             cursor = connection.cursor()
+            
             try:
+                print(f"Inserting into users: {username}, {email}, {mobile_number}")
                 cursor.execute(
                     """
                     INSERT INTO users (username, password, email, country_code, mobile_number, location, pincode)
@@ -132,10 +212,9 @@ def signup():
                     (username, hashed_password, email, country_code, mobile_number, location, pincode)
                 )
                 connection.commit()
-
-                # Store username and email in session
                 session['username'] = username
                 session['email'] = email
+                print("User inserted successfully!")
             except Exception as e:
                 print(f"Error inserting user: {e}")
                 connection.rollback()
@@ -143,11 +222,9 @@ def signup():
                 cursor.close()
                 connection.close()
             
-            # Redirect to payment page after successful signup
             return redirect(url_for('auth.payment_page'))
 
-    return render_template('auth/signup.html', countries=countries)
-
+    return render_template('signup.html', countries=countries)
 
 
 @auth_bp.route('/payment_page', methods=['GET'])
@@ -162,7 +239,7 @@ def payment_page():
         'email': session.get('email'),
         'mobile_number': session.get('mobile_number')
     }
-    return render_template('auth/payment_page.html', user_details=user_details)
+    return render_template('payment_page.html', user_details=user_details)
 
 @auth_bp.route('/payment_upload', methods=['POST'])
 def payment_upload():
@@ -231,4 +308,4 @@ def waiting():
         return redirect(url_for('auth.login'))
     
     username = session['username']
-    return render_template('auth/waiting.html', username=username)
+    return render_template('waiting.html', username=username)

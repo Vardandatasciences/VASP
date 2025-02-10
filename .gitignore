@@ -1,2 +1,4 @@
 .env
 vasp_env
+*.pyc
+__pycache__/

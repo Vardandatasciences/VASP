@@ -14,8 +14,10 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Use environment variable instead of hardcoded API key
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
 # AI Image Generation API configuration
-API_KEY = os.getenv('OPENAI_API_KEY')
 API_URL = "https://api.openai.com/v1/images/generations"
 
 # Storage configuration
@@ -35,7 +37,7 @@ def ensure_directory():
 def generate_image(category, brand_name):
     """Generate image using AI based on category and brand name"""
     headers = {
-        "Authorization": f"Bearer {API_KEY}",
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
         "Content-Type": "application/json"
     }
     

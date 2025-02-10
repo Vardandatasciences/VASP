@@ -7,12 +7,15 @@ import logging
 import urllib.parse
 from datetime import datetime
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # AI Image Generation API configuration
-API_KEY = "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"
+API_KEY = os.getenv('OPENAI_API_KEY')
 API_URL = "https://api.openai.com/v1/images/generations"
 
 # Storage configuration

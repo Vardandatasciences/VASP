@@ -89,7 +89,7 @@ def answer_queries_from_file_with_prompt(file_path, excel_path, output_column="A
         None: Saves the answers back to the Excel file.
     """
     # Step 1: Load and chunk the text file
-    loader = TextLoader(file_path)
+    loader = TextLoader(file_path, encoding='utf-8')  # Specify the encoding
     documents = loader.load()
 
     # Step 2: Split text into chunks

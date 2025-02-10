@@ -3,6 +3,8 @@ from flask import Blueprint, request, jsonify,session,redirect,render_template,u
 import os,shutil
 from app.document_processing.utils import *
 from app.document_processing.llm_processor import *
+from app.document_processing.image_download import *
+from app.document_processing.cloud import *
 from app.auth.utils import *
 from datetime import timedelta
 
@@ -13,6 +15,7 @@ EXTRACTED_FOLDER = Config.EXTRACTED_FOLDER
 EXCEL_FILE = Config.EXCEL_FILE
 EXCEL_TEMPLATE=Config.EXCEL_TEMPLATE
 REFERENCE_FOLDER=Config.REFERENCE_FOLDER
+Excel_file_path=f"{REFERENCE_FOLDER}/{EXCEL_FILE}"
 
 
 doc_bp = Blueprint('doc_processing', __name__,template_folder='templates')
@@ -54,9 +57,11 @@ def upload_file():
         # file_path = "extracted_text/tumbler_invoice.txt"  # Path to your text file
         # excel_path = "queries.xlsx"  # Path to the Excel file containing queries
 
-        shutil.copy(f"{REFERENCE_FOLDER}/{EXCEL_TEMPLATE}/{EXCEL_FILE}", f"{REFERENCE_FOLDER}/{EXCEL_FILE}")
+        shutil.copy(f"{REFERENCE_FOLDER}/{EXCEL_TEMPLATE}/{EXCEL_FILE}", Excel_file_path)
 
-        answer_queries_from_file_with_prompt(output_txt_path,EXCEL_FILE)
+        
+
+        answer_queries_from_file_with_prompt(output_txt_path,Excel_file_path)
 
 
         
@@ -64,6 +69,8 @@ def upload_file():
         data = read_excel_and_display()
 
         data_dict = {item['Name']: item['Answer'] for item in data}
+
+        print(data_dict,'data_dict is data_dict----------------------------------------------------------------')
 
         
         # data_dict['category']=category
@@ -85,7 +92,12 @@ def upload_file():
         data_dict['Order Date'] = order_date_dt.strftime('%Y-%m-%d')
         data_dict['Expiry Date'] = expiry_date_dt.strftime('%Y-%m-%d')
 
-        file_url=file_path
+        file_url=file_path.split('/')[-1].replace('\\', '/')
+        # file_url_2=file_url.split('/')[-1]
+
+        # input(file_url)
+
+        session['file_path']=file_url[8:]
 
         if verify_aws_cli():
         # Example file upload
@@ -106,7 +118,7 @@ def save_edits():
         print("Incoming Form Data:", request.form)
 
         # Load the existing Excel file
-        df = pd.read_excel(EXCEL_FILE)
+        df = pd.read_excel(Excel_file_path)
 
         # Ensure 'Name' and 'Answer' columns exist
         if 'Name' not in df.columns or 'Answer' not in df.columns:
@@ -126,7 +138,7 @@ def save_edits():
                     df = pd.concat([df, new_row], ignore_index=True)
 
         # Save the updated DataFrame back to the Excel file
-        df.to_excel(EXCEL_FILE, index=False)
+        df.to_excel(Excel_file_path, index=False)
         print("Excel file updated successfully!")
 
         data = read_excel_and_display()
@@ -149,15 +161,15 @@ def save_edits():
                           (product_brand,download_image_path,category_name))
             
 
-            # Insert into product_details table
+            # Fixed INSERT statement - added %s for file_path
             cursor.execute(
                 """
                 INSERT INTO product_details (
                     user_name, platform_name, category, provider, product_brand, product_description, order_date, invoice_date,
                     gst_number, invoice_number, quantity, total_amount, discount_percentage, tax_amount,
-                    igst_percentage, seller_address, billing_address, shipping_address, customer_name, pan_number, payement_mode, expiry_date
+                    igst_percentage, seller_address, billing_address, shipping_address, customer_name, pan_number, payement_mode, expiry_date, file_path
                 ) VALUES (
-                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                 )
                 """,
                 (
@@ -182,28 +194,19 @@ def save_edits():
                     df['Customer Name'],
                     df['Pan No'],
                     df['Mode of Payement'],
-                    df['Expiry Date']
+                    df['Expiry Date'],
+                    session['file_path']
                 )
             )
-
-            # Handle 'Others' category
-            if df['category'] == 'Other':
-                specified_category = request.form.get('fields[specified_category]')
-                category_name = request.form.get('fields[name]')
-
-                cursor.execute(
-                    """
-                    INSERT INTO product_images (product_name, category)
-                    VALUES (%s, %s)
-                    """,
-                    (category_name, specified_category)
-                )
 
             connection.commit()
 
         except Exception as e:
             print(f"Error inserting data: {e}")
             connection.rollback()
+            # Add more detailed error logging
+            import traceback
+            print(traceback.format_exc())
         finally:
             cursor.close()
             connection.close()

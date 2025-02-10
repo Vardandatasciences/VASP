@@ -225,6 +225,10 @@ def signup():
             return redirect(url_for('auth.payment_page'))
 
     return render_template('signup.html', countries=countries)
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3e7dbfc0e9068361a4a213216e9d19ed6b4448b9
 
 
 @auth_bp.route('/payment_page', methods=['GET'])

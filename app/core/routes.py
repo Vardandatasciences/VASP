@@ -4,6 +4,7 @@ import os
 from app.auth.utils import *
 
 from config.config import Config
+from app.document_processing.cloud import download_from_s3_cli
 
 UPLOAD_FOLDER = Config.UPLOAD_FOLDER
 EXTRACTED_FOLDER = Config.EXTRACTED_FOLDER
@@ -61,6 +62,8 @@ def home():
             
             # Add both image_link and expiry_date to the product tuple
             products_with_images.append(product + (image_link,))
+
+        print(products_with_images,'--------------------------------')
     finally:
         cursor.close()
         connection.close()
@@ -83,13 +86,13 @@ def home():
 
 @core_bp.route('/products')
 def display_products():
+    print('-------------------------------- producst page called --------------------------------')
     connection = connection_pool.get_connection()
     with connection:
         with connection.cursor() as cursor:
             # Fetch product details
             cursor.execute("SELECT * FROM product_details")
             product_details = cursor.fetchall()
-            # print(product_details)
             
             # Fetch product images based on category
             products_with_images=[]
@@ -99,16 +102,16 @@ def display_products():
                     (product[3],)
                 )
                 image = cursor.fetchone()
-                image_link = image[0].decode('utf-8') if image else 'default_image.jpg'
-
+                image_link = image[0].decode('utf-8') if image else 'static/images/products/default_image.jpg'
+                
+                # Debugging: Print the image link
+                print(f"Image link for product {product[5]}: {image_link}")
 
                 # Append a new tuple combining product details and image
                 products_with_images.append(product + (image_link,))
-                # print(image_link,'------------------------------------------------------------')
 
-        print(products_with_images)
+    print(products_with_images,'--------------------------------')
                 
-
     return render_template('products.html', products=products_with_images)
 
 
@@ -202,13 +205,37 @@ def download_pdf():
         # Get the PDF path from the request
         data = request.json
         pdf_path = data.get('path')
-
-        if not pdf_path or not os.path.exists(pdf_path):
-            return jsonify({'error': 'File not found'}), 404
-
-        # Return the file to the user
-        return send_file(pdf_path, as_attachment=True)
-
+        input(pdf_path)
+        
+        if not pdf_path:
+            return jsonify({'error': 'No file path provided'}), 400
+            
+        # Get the filename from the path
+        file_name = os.path.basename(pdf_path)
+        
+        # Download the file from S3
+        local_file_path = download_from_s3_cli(
+            user_name=session.get('username'),
+            file_name=file_name
+        )
+        
+        if not local_file_path or not os.path.exists(local_file_path):
+            return jsonify({'error': 'File not found in S3'}), 404
+            
+        # Send the file to the user
+        try:
+            return send_file(
+                local_file_path,
+                as_attachment=True,
+                download_name=file_name
+            )
+        finally:
+            # Clean up the temporary file after sending
+            try:
+                os.remove(local_file_path)
+            except Exception as e:
+                print(f"Error removing temporary file: {e}")
+                
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     

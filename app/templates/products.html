@@ -36,7 +36,8 @@
         <div class="products-container">
             <div class="products-row">
               <div class="product-col">
-                <img src="{{ product[-1] }}" alt="Product Image">
+                <img src="{{ url_for('static', filename='images/' + product[-1].split('/')[-1].replace('\\', '/')) }}" alt="Upload Icon">
+
               </div>
               <div class="product-col">
                 <h2>{{ product[5] }}</h2>
@@ -44,7 +45,7 @@
               </div>
               <div class="product-col">
                 <p>Order Date: {{ product[7] }}</p>
-                <p>Expiry Date: {{ product[-2] }}</p>
+                <p>Expiry Date: {{ product[-3] }}</p>
               </div>
               <div class="product-col">
                 <p>Time Remaining:</p>
@@ -57,7 +58,7 @@
                 <p>₹{{ product[12] }}</p>
               </div>
               <div class="product-col">
-                <a href="#" onclick="downloadPDF('{{ product[13] }}')" title="Download PDF">
+                <a href="#" onclick="downloadPDF('{{ product[-2] }}')" title="Download PDF">
                     <img src="{{ url_for('static', filename='images/download_icon.png') }}" alt="Download" style="width: 24px; height: 24px;">
                 </a>
                </div>
@@ -70,7 +71,8 @@
         (function() {
             const productId = {{ loop.index }};
             const orderDate = new Date("{{ product[7] }}");
-            const expiryDate = new Date("{{ product[-2] }}");
+            const expiryDate = new Date("{{ product[-3] }}");
+            console.log("{{ product }}")
 
             function calculateTimeRemaining() {
                 const now = new Date();
@@ -116,11 +118,12 @@
             body: JSON.stringify({ path: pdfPath })
         })
         .then(response => {
-            if (response.ok) {
-                return response.blob(); // Get the file as a Blob
-            } else {
-                throw new Error('Failed to download PDF');
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error || 'Failed to download PDF');
+                });
             }
+            return response.blob();
         })
         .then(blob => {
             // Create a download link and trigger it
@@ -128,12 +131,14 @@
             const a = document.createElement('a');
             a.href = url;
             a.download = pdfPath.split('/').pop(); // Use the file name from the path
+            document.body.appendChild(a);
             a.click();
+            document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to download the PDF. Please try again.');
+            alert('Failed to download the PDF: ' + error.message);
         });
     }
     </script>

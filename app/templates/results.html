@@ -30,10 +30,15 @@
         <div class="split-container">
             <!-- Left Section: PDF Viewer -->
             <div class="left-section">
+                <!-- Debug info -->
+                <div style="display: none;">
+                    Debug Path: {{ pdf_url }}
+                </div>
+                
                 {% if pdf_url.endswith('.pdf') %}
-                    <embed src="{{ pdf_url }}" type="application/pdf" width="100%" height="100%">
+                <embed src="{{ url_for('static', filename='uploads/' + pdf_url.split('/')[-1].replace('\\', '/')) }}" type="application/pdf" width="100%" height="100%">
                 {% else %}
-                    <img src="{{ pdf_url }}" alt="Preview" width="100%">
+                    <img src="{{ url_for('static', filename='uploads/' + pdf_url.split('/')[-1].replace('\\', '/')) }}" alt="Preview" width="100%">
                 {% endif %}
             </div>
             

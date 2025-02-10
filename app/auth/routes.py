@@ -146,7 +146,7 @@ def signup():
             # Redirect to payment page after successful signup
             return redirect(url_for('auth.payment_page'))
 
-    return render_template('auth/signup.html', countries=countries)
+    return render_template('signup.html', countries=countries)
 
 
 
@@ -162,7 +162,7 @@ def payment_page():
         'email': session.get('email'),
         'mobile_number': session.get('mobile_number')
     }
-    return render_template('auth/payment_page.html', user_details=user_details)
+    return render_template('payment_page.html', user_details=user_details)
 
 @auth_bp.route('/payment_upload', methods=['POST'])
 def payment_upload():
@@ -231,4 +231,4 @@ def waiting():
         return redirect(url_for('auth.login'))
     
     username = session['username']
-    return render_template('auth/waiting.html', username=username)
+    return render_template('waiting.html', username=username)

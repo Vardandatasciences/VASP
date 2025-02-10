@@ -1,18 +1,27 @@
 import mysql.connector.pooling
 
 # Database connection pooling
+# dbconfig = {
+#     "host": "202.53.78.150",
+#     "user": "Munisyam",
+#     "password": "vardaa@123",
+#     "database": "vasp"
+# }
+
 dbconfig = {
-    "host": "202.53.78.150",
-    "user": "Munisyam",
-    "password": "vardaa@123",
+    "host": "localhost",
+    "user": "root",
+    "password": "root",
     "database": "vasp"
 }
 
 connection_pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_name="mypool",
-    pool_size=5,  # Reduced pool size to prevent exceeding max connections
+    pool_size=1,  # Reduced pool size to prevent exceeding max connections
+
     pool_reset_session=True,
     **dbconfig
+
 )
 
 def execute_query(query, params=None, commit=False):

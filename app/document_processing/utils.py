@@ -1,13 +1,16 @@
 from app.auth.utils import *
 import pandas as pd
 
-import re,datetime
+import re
+from datetime import datetime, timedelta
 
 from config.config import Config
 
 UPLOAD_FOLDER = Config.UPLOAD_FOLDER
 EXTRACTED_FOLDER = Config.EXTRACTED_FOLDER
 EXCEL_FILE = Config.EXCEL_FILE
+REFERENCE_FOLDER=Config.REFERENCE_FOLDER
+Excel_file_path=f"{REFERENCE_FOLDER}/{EXCEL_FILE}"
 
 
 
@@ -16,7 +19,7 @@ def read_excel_and_display():
     Read the Excel file and return data for rendering.
     """
     try:
-        df = pd.read_excel(EXCEL_FILE)
+        df = pd.read_excel(Excel_file_path)
         data = df.to_dict(orient="records")
         return data
     except Exception as e:

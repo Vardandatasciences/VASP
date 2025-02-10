@@ -1,0 +1,57 @@
+Tax Invoice/Bill of Supply/Cash Memo
+(Original for Recipient)
+*ASSPL-Amazon Seller Services Pvt. Ltd., ARIPL-Amazon Retail India Pvt. Ltd. (only where Amazon Retail India Pvt. Ltd. fulfillment center is co-located)
+Customers desirous of availing input GST credit are requested to create a Business account and purchase on Amazon.in/business from Business eligible offers
+Please note that this invoice is not a demand for payment
+Page 1 of 1For DAWNTECH ELECTRONICS PRIVATE LIMITED:
+Authorized Signatory
+Order Number:  407-2331805-1140345 Invoice Number :  RSZX-11194
+Order Date:  25.12.2024 Invoice Details :  TN-RSZX-1932276435-2425
+Invoice Date :  27.12.2024
+Sl.
+NoDescription Unit Price Discount QtyNet
+AmountTax
+RateTax
+TypeTax
+AmountTotal
+Amount
+1Samsung 7 kg, 5 star, Ecobubble, Digital Inverter,
+Fully-Automatic Top Load Washing Machine
+(WA70BG4441YYTL, Lavender Gray) |
+B0B8NHX62W ( B0B8NHX62W )
+HSN:84501100₹14,822.03 -₹635.591₹14,186.44 18%IGST₹2,553.56₹16,740.00
+TOTAL: ₹2,553.56₹16,740.00
+Amount in Words:
+Sixteen Thousand Seven Hundred Forty only
+Whether tax is payable under reverse charge - No
+Payment Transaction ID:
+111294YCvO3hVSdxWxZVMO2xoDate & Time: 25/12/2024, 12:42:52
+hrsInvoice Value:
+16,740.00Mode of Payment:
+Promotion
+Payment Transaction ID: CXQceClmlokFWLakyJLRDate & Time: 25/12/2024, 12:42:44
+hrsMode of Payment: Credit
+CardSold By :
+DAWNTECH ELECTRONICS PRIVATE LIMITED
+* No.3/34 Borex Nagar GNT Road Peravallur
+Village Chinnambedu, post, Ponneri Taluk,
+Tiruvallur District
+Tiruvallur, Tamil Nadu, 601206
+IN
+PAN No: AAMCM3175B
+GST Registration No: 33AAMCM3175B2ZOBilling Address :
+Syam
+1/57/A/194 , sri Aurobindo Residency, 9, sriram
+nagar road,Sri Ram nagar
+HYDERABAD, TELANGANA, 500084
+IN
+State/UT Code: 36
+Shipping Address :
+Syam
+Abaku sai
+1-1,Vajjavaripalem village, chittedu
+kota, ANDHRA PRADESH, 524410
+IN
+State/UT Code: 37
+Place of supply: ANDHRA PRADESH
+Place of delivery: ANDHRA PRADESH

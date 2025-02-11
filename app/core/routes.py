@@ -38,7 +38,7 @@ def home():
         categories = [row[0] for row in cursor.fetchall()]
 
         # Fetch product details with images
-        cursor.execute("SELECT * FROM product_details")
+        cursor.execute("SELECT * FROM product_details where user_name = %s",(session['username'],))
         product_details = cursor.fetchall()
 
         # Append product images
@@ -91,7 +91,7 @@ def display_products():
     with connection:
         with connection.cursor() as cursor:
             # Fetch product details
-            cursor.execute("SELECT * FROM product_details")
+            cursor.execute("SELECT * FROM product_details where user_name = %s",(session['username'],))
             product_details = cursor.fetchall()
             
             # Fetch product images based on category
@@ -205,7 +205,7 @@ def download_pdf():
         # Get the PDF path from the request
         data = request.json
         pdf_path = data.get('path')
-        input(pdf_path)
+        # input(pdf_path)
         
         if not pdf_path:
             return jsonify({'error': 'No file path provided'}), 400

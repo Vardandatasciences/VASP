@@ -1,0 +1,283 @@
+Duplicate Copy
+Reliance Retail Limited
+#LG10,Phoenix Market City
+Opp.Mahadevapura CMC Office,
+Whitefield Road,
+Bangalore - 560048.
+Store Ph:080-67266222
+Service Ph:080-67266233
+CIN NO: U01100MH1999PLC120563
+Website:www.relianceretail.com
+Tax Invoice
+----------------------------------------
+Customer Address:
+V SRINIVASU
+Flat No: 404
+Flr No: 4TH FLOOR
+Wing: B BLOCK
+Bldg: ALEMBIC URBAN FOREST
+Soc: AB VAJPAYEE ROAD
+Sec/Loc: .
+Plot No: CHENNASANDRA MAIN ROAD
+Street: OPP TO WHITEFIELD GLOBAL SCHOOL
+Area: KADUGODI
+City: BANGALORE EAST
+State: KARNATAKA
+PinCode: 560067
+Contact# 9886642984
+NEELIMA_VE@YAHOO.CO.IN
+Relationship ID: 9886642984
+----------------------------------------
+your tech expert
+ID: 60499642
+----------------------------------------
+Place of Supply State Code: 29 KAR
+Customer Type : URD
+Supply State GSTN Number:29AABCR1718E1ZL
+----------------------------------------
+ItemName                Qty     Amt(Rs)
+HSN/SAC
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+----------------------------------------
+iPhone XR 128GB         1EA    64889.00
+Discount            2.00%  -1297.78
+EAN#:190198772794  851770
+IMEI NUMBER: 353079105629742
+3 Months ADLD           1EA       99.00
+EAN#:600523143     998716
+Delivery Location :      DC
+Del. DateTime: 04/08/2019 10:00-22:00
+WP ADLD Offer                -99.00
+BALANCE DUE                 63591.22
+VISA x-2091                 63591.22
+ApprovalCode:044177
+Items Purchased = 2
+GST RECEIPT SUMMARY
+----------------------------------------
+HSN/SAC Tax  Taxable   Tax        Total
+Rate  Amount  Amount     Amount
+----------------------------------------
+998716       83.77     15.08       98.85
+SGST        9.00%      7.54
+CGST        9.00%      7.54
+CESS        0.00%      0.00
+----------------------------------------
+851770    56689.61   6802.76    63492.37
+CESS        0.00%      0.00
+SGST        6.00%   3401.38
+CGST        6.00%   3401.38
+========================================
+TOTAL:    56773.38   6817.84    63591.22
+========================================
+THANK YOU
+C#60409751     Dt: 03/08/2019 17:22:51
+S#8884         Txn#27         R#136
+PaymentRefNo#8884136002703082019
+Tax Invoice#888413619907488
+----------------------------------------
+----------------------------------------
+DIGITAL ASSIST
+YOUR HAPPINESS IS OUR PRIORITY:)
+If not happy,we will make it right.
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+Call:1800 103 1044
+Email:reliancedigital@ril.com
+----------------------------------------
+AMOUNT INCLUSIVE OF APPLICABLE TAXES
+Cheques are subject to realization and
+All Disputes are subject to Mumbai
+Reliance Corporate Park,
+cheque realization.
+goods will be delivered only after the
+Jurisdiction only.
+****************************************
+GSTN #: 29AABCR1718E1ZL
+----------------------------------------
+8884136002703082019
+11.3.9 : OK
+----------------------------------------
+***************************************
+Promotion Discount Coupon
+***************************************
+CouponID : 382KA29A28N
+CouponName : SOUTH MPV2
+Coupon Amount : -0.57
+TxnRefID : 8884136002703082019
+Redeem StartDate : 26/07/2019
+Redeem EndDate : 09/08/2019
+C#60409751     Dt: 03/08/2019 17:22:51
+S#8884         Txn#27         R#136
+* Terms and Condition as Displayed in
+Store at the time of Purchase *
+***************************************
+***************************************
+Promotion Discount Coupon
+***************************************
+CouponID : 88841360270308193264
+CouponName : CARVAAN MINI AT 1490
+Coupon Amount : -1000.00
+TxnRefID : 8884136002703082019
+Redeem StartDate : 02/08/2019
+Redeem EndDate : 03/09/2019
+C#60409751     Dt: 03/08/2019 17:22:51
+S#8884         Txn#27         R#136
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+* Terms and Condition as Displayed in
+Store at the time of Purchase *
+***************************************
+Reliance Retail Limited
+HDFC BANK
+R013258884 Reliance Digital
+8884 Reliance Digital BANGALORE
+Bengaluru
+DATE:2019-08-03       TIME:17:26:13
+MID: 0  TID: 27071347
+BATCH NUM: 000354     INV. NUM: 007445
+EMI SALE   _ZERO COST HDFC 6M
+Card No.: 485498xxxxxx2091 CHIP
+EXP DATE: xx/xx      CARD: VISA
+APPR. CODE: 044177   RRN: 000000009520
+AID:A0000000031010  TSI:E800
+TVR :0080048000000000009520
+TC:595517C0A56A2E8D Label:VISA CREDIT
+AMOUNT: Rs 63591.22
+PIN VERIFIED OK. SIGNATURE NOT REQUIRED.
+SRINIVASU V              /
+I AGREE TO PAY AS PER   CARD ISSUER AGREEMENT   Innovi
+ti uniPAY NEXT (ver1.0)
+***** MERCHANT COPY *****
+THANK YOU
+HDFC Bank
+R013258884 Reliance Digital
+8884 Reliance Digital BANGALORE
+Bengaluru
+DATE:2019-08-03       TIME:17:26:13
+MID: 0  TID: 27071347
+BATCH NUM: 000354     INV. NUM: 007445
+EMI SALE
+Card No.: 485498xxxxxx2091 MANUAL
+ISSUER     :HDFC Bank       ACQUIRER    :  HDFC BANK
+EXP DATE: xx/xx      CARD: VISA
+AID:A0000000031010  TSI:E800
+TVR :0080048000
+APPR. CODE: 044177   RRN: 000000009520
+TC:595517C0A56A2E8D Label:VISA CREDIT
+Tenure: 6 months
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+Card Issuer: HDFC BANK
+Txn Amt: Rs 63591.22
+Merchant Payback: 3.70 %
+Merchant Payback Amt: Rs 2352.87
+Loan Amt: Rs 61238.35
+Easy EMI Fin Charge(p.a): 13.00 %
+EMI Amt: Rs 10596.86
+Proc Fee: Rs 0.00
+Adv EMI: 0
+Total Amt(with Interest/Proc Fee): Rs 63581.15
+CUSTOMER CONSENT FOR EMI
+# I have been offered the  choice of  normal
+as well as  EMI for  this  purchase and  I
+have chosen EMI.
+# I have  fully  understood  and  accept the
+terms of EMI scheme and applicable charges
+mentioned in this charge-slip.
+# EMI  conversion  subject to  Bank / Issuer
+discretion  and  may  take minimum  4 working
+days.
+# GST  extra  on  Interest  amount.
+# EMI  Applicable  on  Credit  Cards  Only.
+# Merchant Cashback (wherever applicable) is
+being  provided  by  respective  merchant/
+manufacturer  and  not by  Bank / Issuer.
+BASE AMOUNT: Rs 63591.22
+PIN VERIFIED OK. SIGNATURE NOT REQUIRED.
+SRINIVASU V              /
+I AGREE TO PAY AS PER   CARD ISSUER AGREEMENT   Innovi
+ti uniPAY NEXT (ver1.0)
+***** MERCHANT COPY *****        Reliance Retai
+l Limited
+HDFC BANK
+R013258884 Reliance Digital
+8884 Reliance Digital BANGALORE
+Bengaluru
+DATE:2019-08-03       TIME:17:26:13
+MID: 0  TID: 27071347
+BATCH NUM: 000354     INV. NUM: 007445
+EMI SALE   _ZERO COST HDFC 6M
+Card No.: 485498xxxxxx2091 CHIP
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+EXP DATE: xx/xx      CARD: VISA
+APPR. CODE: 044177   RRN: 000000009520
+AID:A0000000031010  TSI:E800
+TVR :0080048000000000009520
+TC:595517C0A56A2E8D Label:VISA CREDIT
+AMOUNT: Rs 63591.22
+PIN VERIFIED OK. SIGNATURE NOT REQUIRED.
+SRINIVASU V              /
+I AGREE TO PAY AS PER   CARD ISSUER AGREEMENT   Innovi
+ti uniPAY NEXT (ver1.0)
+***** CUSTOMER COPY *****
+THANK YOU
+HDFC Bank
+R013258884 Reliance Digital
+8884 Reliance Digital BANGALORE
+Bengaluru
+DATE:2019-08-03       TIME:17:26:13
+MID: 0  TID: 27071347
+BATCH NUM: 000354     INV. NUM: 007445
+EMI SALE
+Card No.: 485498xxxxxx2091 MANUAL
+ISSUER     :HDFC Bank       ACQUIRER    :  HDFC BANK
+EXP DATE: xx/xx      CARD: VISA
+AID:A0000000031010  TSI:E800
+TVR :0080048000
+APPR. CODE: 044177   RRN: 000000009520
+TC:595517C0A56A2E8D Label:VISA CREDIT
+Tenure: 6 months
+Card Issuer: HDFC BANK
+Txn Amt: Rs 63591.22
+Merchant Payback: 3.70 %
+Merchant Payback Amt: Rs 2352.87
+Loan Amt: Rs 61238.35
+Easy EMI Fin Charge(p.a): 13.00 %
+EMI Amt: Rs 10596.86
+Proc Fee: Rs 0.00
+Adv EMI: 0
+Total Amt(with Interest/Proc Fee): Rs 63581.15
+CUSTOMER CONSENT FOR EMI
+# I have been offered the  choice of  normal
+as well as  EMI for  this  purchase and  I
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.
+have chosen EMI.
+# I have  fully  understood  and  accept the
+terms of EMI scheme and applicable charges
+mentioned in this charge-slip.
+# EMI  conversion  subject to  Bank / Issuer
+discretion  and  may  take minimum  4 working
+days.
+# GST  extra  on  Interest  amount.
+# EMI  Applicable  on  Credit  Cards  Only.
+# Merchant Cashback (wherever applicable) is
+being  provided  by  respective  merchant/
+manufacturer  and  not by  Bank / Issuer.
+BASE AMOUNT: Rs 63591.22
+PIN VERIFIED OK. SIGNATURE NOT REQUIRED.
+SRINIVASU V              /
+I AGREE TO PAY AS PER   CARD ISSUER AGREEMENT   Innovi
+ti uniPAY NEXT (ver1.0)
+***** CUSTOMER COPY *****
+DISCLAIMER: This is a computer generated Duplicate Invoice copy hence seal and signature not required. Any replacement ,
+warranty, guarantee and product liability claim shall be honoured against original invoice only. Reliance Retail Limited.
+may, at its sole discretion, relax or waive any of its conditions mentioned overleaf the original invoice.

@@ -34,16 +34,19 @@ def standardize_date(date_str):
     Convert various date string formats to a standard datetime object.
     Returns None if the date string cannot be parsed.
     """
-    # Remove any leading/trailing whitespace
+    # Remove any leading/trailing whitespace and common prefixes
     date_str = str(date_str).strip()
+    # Remove prefix if it exists (e.g., "The order date is ")
+    if "The order date is " in date_str:
+        date_str = date_str.replace("The order date is ", "")
     
     # List of possible date formats
     date_formats = [
         # Standard formats
+        "%d/%m/%Y",          # 24/01/2021
         "%Y-%m-%d",          # 2024-12-23
         "%d-%m-%Y",          # 23-12-2024
         "%Y/%m/%d",          # 2024/12/23
-        "%d/%m/%Y",          # 23/12/2024
         "%d.%m.%Y",          # 23.12.2024
         "%Y.%m.%d",          # 2024.12.23
         
@@ -66,6 +69,10 @@ def standardize_date(date_str):
         "%m.%d.%Y",          # 12.23.2024
     ]
     
+    # Clean the date string - remove periods at the end and any extra whitespace
+    date_str = date_str.rstrip('.')
+    date_str = date_str.strip()
+    
     # Try to parse the date string using the defined formats
     for fmt in date_formats:
         try:
@@ -81,6 +88,19 @@ def standardize_date(date_str):
         try:
             date_part = iso_match.group(1)
             return datetime.strptime(date_part, '%Y-%m-%d')
+        except ValueError:
+            pass
+            
+    # If all parsing attempts fail, try to extract date using regex
+    date_pattern = r'(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})'
+    match = re.search(date_pattern, date_str)
+    if match:
+        day, month, year = match.groups()
+        # Handle two-digit years
+        if len(year) == 2:
+            year = '20' + year
+        try:
+            return datetime(int(year), int(month), int(day))
         except ValueError:
             pass
     

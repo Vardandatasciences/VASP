@@ -17,6 +17,7 @@ import pandas as pd
 
 # Load from .env file
 load_dotenv()
+os.environ['OPENAI_API_KEY']  = os.getenv('OPENAI_API_KEY')
 openai_api_key = os.getenv('OPENAI_API_KEY')
 
 def extract_text_line_by_line(text):
@@ -137,6 +138,7 @@ def answer_queries_from_file_with_prompt(file_path, excel_path, output_column="A
 
         # Run the chain with the current query and context
         answer = chain.run({"context": context, "query": query})
+        print(answer)
         answers.append(answer)
 
     # Step 8: Save answers to the Excel file

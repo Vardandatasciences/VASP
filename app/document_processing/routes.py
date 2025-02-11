@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify,session,redirect,render_template,u
 import os,shutil
 from app.document_processing.utils import *
 from app.document_processing.llm_processor import *
-from app.document_processing.image_download import *
+from app.document_processing.crawler import *
 from app.document_processing.cloud import *
 from app.auth.utils import *
 from datetime import timedelta
@@ -17,6 +17,11 @@ EXCEL_TEMPLATE=Config.EXCEL_TEMPLATE
 REFERENCE_FOLDER=Config.REFERENCE_FOLDER
 Excel_file_path=f"{REFERENCE_FOLDER}/{EXCEL_FILE}"
 
+
+from dotenv import load_dotenv
+load_dotenv()
+
+os.environ['OPENAI_API_KEY']  = os.getenv('OPENAI_API_KEY')
 
 doc_bp = Blueprint('doc_processing', __name__,template_folder='templates')
 

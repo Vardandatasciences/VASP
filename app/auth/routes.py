@@ -15,7 +15,7 @@ UPLOAD_FOLDER = Config.UPLOAD_FOLDER
 EXTRACTED_FOLDER = Config.EXTRACTED_FOLDER
 EXCEL_FILE = Config.EXCEL_FILE
 WHATSAPP_API_URL = 'https://graph.facebook.com/v21.0/521803094347148/messages'
-WHATSAPP_ACCESS_TOKEN = 'EAAZAFlVKZBf1EBO6qek1hZBaKwpFbPocrTmbyWmTgQ6zjeRyCn0DuJF27rEq91hYgzgMsgAmd2eSWwmZAi6VGd4IiouzsYYSPg2OqBSVN9clnKqX4yeWIcULbZA0rh2phwIkC5hp2ZCPZALq64PUKCNaZAoyVRYECwGaVuIyEQsX8DUHmQC8PbX9dMXXCPZAn23QnsW04jMKwiNuqauvgIE67kZAHusQ0ir7TgWT4ZD'
+WHATSAPP_ACCESS_TOKEN = 'EAAZAFlVKZBf1EBO5KmWIa0Sj9Y1YxT530HyFoz4i8qGspSKNfAwYl3c5sL21zV8WN5fKB5rsDUiDuGBDEgXY4dNWoZCZC8j0hQnLW54ixOPYmp53dQQPjn8GrKMcEv92VVHXxuunkxysAzKPrI8C2WW4pZAkRLVFbZBoeNNpSpQD25LnDTvTW1LWxfGkmYOFiXZBAZDZD'
 TEMPLATE_NAME = 'otp_verfication'
 
 
@@ -225,10 +225,7 @@ def signup():
             return redirect(url_for('auth.payment_page'))
 
     return render_template('signup.html', countries=countries)
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e7dbfc0e9068361a4a213216e9d19ed6b4448b9
 
 
 @auth_bp.route('/payment_page', methods=['GET'])

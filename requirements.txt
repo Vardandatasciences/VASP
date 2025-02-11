@@ -17,3 +17,6 @@ requests
 pillow
 flask-login
 langchain_openai
+transformers
+torch
+langchain-groq

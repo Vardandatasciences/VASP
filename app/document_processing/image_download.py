@@ -14,8 +14,8 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Use environment variable instead of hardcoded API key
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+# Use project API key for image generation
+PROJECT_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # AI Image Generation API configuration
 API_URL = "https://api.openai.com/v1/images/generations"
@@ -34,10 +34,23 @@ def ensure_directory():
         os.makedirs(PERMANENT_STORAGE)
         logger.info(f"Created directory: {PERMANENT_STORAGE}")
 
+def validate_api_key():
+    """Validate that the API key is present and properly formatted"""
+    api_key = os.getenv('OPENAI_API_KEY')
+    if not api_key:
+        raise ValueError("OpenAI API key not found. Please set OPENAI_API_KEY in your .env file")
+    if not api_key.startswith('sk-'):
+        raise ValueError("Invalid OpenAI API key format. API key should start with 'sk-'")
+    return api_key
+
 def generate_image(category, brand_name):
     """Generate image using AI based on category and brand name"""
+    if not PROJECT_API_KEY:
+        logger.error("Project API key not found")
+        raise ValueError("Project API key not found. Please set PROJECT_API_KEY in your .env file")
+    
     headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Authorization": f"Bearer {PROJECT_API_KEY}",
         "Content-Type": "application/json"
     }
     
@@ -97,6 +110,8 @@ def save_image(category, brand_name, image_data):
         clean_brand = ''.join(c for c in brand_name if c.isalnum() or c in (' ', '_')).rstrip()
         
         clean_name = f"{clean_category}_{clean_brand}".replace(' ', '_')[:50]
+
+        print(clean_name,"======================================================================name is")
         
         # Create filename with timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
